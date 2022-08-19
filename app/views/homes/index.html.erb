@@ -1,0 +1,18 @@
+<h1>Users Index</h1>
+<% if user_signed_in?  %>
+<% if current_user.has_role? :admin%>
+<h2>Hey! Admin Here </h2>
+<%else%>
+<h2>Hey! User Here</h2>
+<% end %>
+	<%= current_user.full_name %>
+	<%= link_to "Edit", edit_user_registration_path %>
+	<%= button_to "Logout", destroy_user_session_path, method: :delete %>
+	<%= link_to "Create Blog", new_user_blog_path(current_user)%>
+	<%= link_to "Show Blog", user_blogs_path(current_user)%>
+<% else %>
+	<%= link_to "Sign in" , new_user_session_path %>
+	<%= link_to "New User" , new_user_registration_path %>
+ <% end %>
+
+

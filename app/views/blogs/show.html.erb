@@ -1,0 +1,26 @@
+<h2>Blogs</h2>
+
+<p>
+	<%#debugger%>
+	<strong>Blog:</strong>
+	<%= @blog.title %>
+	<%= @blog.description %>
+</p>
+<%#= link_to 'edit', edit_user_blog_path(current_user.id,blog.id) %>
+<%#=link_to 'Destroy', [blog.user, blog] ,
+method: :delete %>
+
+<%= form_with scope: :comment, url: user_blog_comments_path(current_user.id, @blog.id), method: :post  do |form| %>
+<div>
+	<%= form.label :comment %>
+	<%= form.text_field :text %>
+</div>
+<div>
+	<%= form.submit %>
+</div>
+<% end %>
+
+<h1>Comments</h1>
+<% @comment.each do |comment| %>
+	<%= comment.text %><br>
+<% end %>

@@ -1,0 +1,38 @@
+<h1>Blogs Here</h1>
+<%# debugger %>
+<% @blogs.each do |blog| %>
+<p>
+	<%# debugger %>
+	<% if current_user.has_role? :admin %>
+	<strong>title</strong>
+	<%= blog.title %><br>
+
+	<strong>description</strong>
+	<%= blog.description %><br>
+
+	<strong>User_id:</strong>
+	<%= blog.user_id%><br>
+
+	<strong>Blog</strong>
+	<%= blog.position %><br>
+	<%= link_to "View", user_blog_path(blog.user_id, blog.id)%>
+	<% if blog.position == false %>
+	<%= button_to 'is_approved', user_blog_blog_is_approved_path(blog.user_id,blog.id) %><br>
+</p>
+<% end %>
+
+<%else%>
+<% if blog.position == true %>
+	<strong>title</strong>
+	<%= blog.title %><br>
+
+	<strong>description</strong>
+	<%= blog.description %><br>
+
+	<strong>User_id:</strong>
+	<%= blog.user_id%><br>
+	<%= link_to "View", user_blog_path(blog.user_id, blog.id)%>
+	<% end %>
+<% end %>
+<% end %>
+<%= link_to 'Back', :back %>
